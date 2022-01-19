@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できる時' do
-      it 'nickname,email,password,password_confirmation,last_name,forst_name,last_name_read,first_name_read,birth_dateが存在すれば登録できる' do
+      it '全ての値が存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
@@ -62,13 +62,13 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'passwordが5文字以下では登録でいない' do
         @user.password = '55555'
         @user.password_confirmation = '55555'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
     end
   end
