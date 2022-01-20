@@ -70,6 +70,50 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
+
+
+
+
+
+
+      it '英字のみのpasswordでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password must be alphanumeric")
+      end
+      it '数字のみのpasswordでは登録できない' do
+        @user.password = '111111'
+        @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password must be alphanumeric")
+      end
+      it '全角文字を含むpasswordは登録できない' do
+        @user.password = 'ａａａａａａ'
+        @user.password_confirmation = 'ａａａａａａ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password must be alphanumeric")
+      end
+      it 'last_nameに半角文字が含まれていると登録できない' do
+        @user.last_name = 'ｱｱｱｱｱｱ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name Full-width Japanese only")
+      end
+      it 'first_nameに半角文字が含まれていると登録できない' do
+        @user.first_name = 'ｱｱｱｱｱｱ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name Full-width Japanese only")
+      end
+      it 'last_name_readにカタカナ以外の文字が含まれていると登録できない' do
+        @user.last_name_read = 'ああああああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name read Full-width katakana only")
+      end
+      it 'first_name_readにカタカナ以外の文字が含まれていると登録できない' do
+        @user.first_name_read = 'ああああああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name read Full-width katakana only")
+      end
     end
   end
 end
