@@ -18,4 +18,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, format: { with: NAME_RULES, message: "Full-width Japanese only" }
   validates :last_name_read, presence: true, format: { with: NAME_READ_RULES, message: "Full-width katakana only" }
   validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: "Full-width katakana only" }
+
+  belongs_to :user
+
 end
