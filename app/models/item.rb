@@ -4,9 +4,9 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :category
   belongs_to :condition
-  belomgs_to :prefecture
-  belomgs_to :shipping_cost
-  belomgs_to :shipping_time
+  belongs_to :prefecture
+  belongs_to :shipping_cost
+  belongs_to :shipping_time
 
   with_options presence: true do
     validates :product_name
