@@ -91,22 +91,22 @@ RSpec.describe User, type: :model do
       it 'last_nameに半角文字が含まれていると登録できない' do
         @user.last_name = 'ｱｱｱｱｱｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name Full-width Japanese only")
+        expect(@user.errors.full_messages).to include("Last name full-width Japanese only")
       end
       it 'first_nameに半角文字が含まれていると登録できない' do
         @user.first_name = 'ｱｱｱｱｱｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name Full-width Japanese only")
+        expect(@user.errors.full_messages).to include("First name full-width Japanese only")
       end
       it 'last_name_readにカタカナ以外の文字が含まれていると登録できない' do
         @user.last_name_read = 'ああああああ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name read Full-width katakana only")
+        expect(@user.errors.full_messages).to include("Last name read full-width katakana only")
       end
       it 'first_name_readにカタカナ以外の文字が含まれていると登録できない' do
         @user.first_name_read = 'ああああああ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name read Full-width katakana only")
+        expect(@user.errors.full_messages).to include("First name read full-width katakana only")
       end
       it 'emailに@が含まれていないと登録できない' do
         @user.email = 'aaaaaa.com'

@@ -13,12 +13,12 @@ class User < ApplicationRecord
   NAME_RULES = /\A[ぁ-んァ-ヶー-龠々ー]+\z/
   NAME_READ_RULES = /\A[ァ-ヶー]+\z/
 
-  validates :password, format: { with: PASSWORD_RULES, message: "must be alphanumeric" }
-  validates :last_name, presence: true, format: { with: NAME_RULES, message: "Full-width Japanese only" }
-  validates :first_name, presence: true, format: { with: NAME_RULES, message: "Full-width Japanese only" }
-  validates :last_name_read, presence: true, format: { with: NAME_READ_RULES, message: "Full-width katakana only" }
-  validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: "Full-width katakana only" }
+  validates :password, format: { with: PASSWORD_RULES, message: " must be alphanumeric" }
+  validates :last_name, presence: true, format: { with: NAME_RULES, message: "full-width Japanese only" }
+  validates :first_name, presence: true, format: { with: NAME_RULES, message: "full-width Japanese only" }
+  validates :last_name_read, presence: true, format: { with: NAME_READ_RULES, message: "full-width katakana only" }
+  validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: "full-width katakana only" }
 
-  belongs_to :user
+  has_many :items
 
 end
