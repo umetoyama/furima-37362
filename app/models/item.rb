@@ -2,7 +2,6 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
@@ -13,9 +12,11 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :product_name
     validates :description
+    validates :image
   end
 
-  validates :price, presence: true, numericality: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/, message: "must be single-byte numbers only"}
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  # , format: { with: /\A[0-9]+\z/, message: "must be single-byte numbers only"}
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id
