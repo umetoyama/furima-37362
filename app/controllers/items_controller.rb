@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
 
   def move_to_sign_up
     unless user_signed_in?
-      redirect_to "/users/sign_up"
+      redirect_to "/users/sign_in"
     end
   end
 
