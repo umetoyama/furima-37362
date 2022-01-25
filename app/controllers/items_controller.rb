@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_action :move_to_sign_up, except: [:index]
 
   def index
+    @item = Item.create
+    @items = Item.all
   end
 
   def new
