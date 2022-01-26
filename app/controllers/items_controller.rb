@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_sign_up, except: [:index, :show]
   before_action :move_to_root_path, only: [:edit]
-  before_action :item_select, only: [:show, :edit, :update]
+  before_action :item_select, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all
@@ -24,6 +24,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to action: :index
   end
 
   def update
