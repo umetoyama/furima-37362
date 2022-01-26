@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_sign_up, except: [:index, :show]
+  before_action :move_to_root_path, only: [:edit]
 
   def index
     @items = Item.all
@@ -44,6 +45,13 @@ class ItemsController < ApplicationController
   def move_to_sign_up
     unless user_signed_in?
       redirect_to "/users/sign_in"
+    end
+  end
+
+  def move_to_root_path
+    @item = Item.find(params[:id])
+    unless current_user.id == @item.user_id
+      redirect_to root_path
     end
   end
 
