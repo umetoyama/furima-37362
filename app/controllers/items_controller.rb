@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_sign_up, except: [:index, :show]
-  before_action :move_to_root_path, only: [:edit]
+  before_action :move_to_root_path, only: [:edit, :destroy]
   before_action :item_select, only: [:show, :edit, :update, :destroy]
 
   def index
