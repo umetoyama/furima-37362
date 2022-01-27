@@ -6,5 +6,6 @@ root to: "items#index"
 
 resources :users
 resources :items
+resources :orders, only:[:index, :create]
 
 end
