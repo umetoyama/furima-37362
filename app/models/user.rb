@@ -20,5 +20,6 @@ class User < ApplicationRecord
   validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: "full-width katakana only" }
 
   has_many :items
+  has_many :orders
 
 end
