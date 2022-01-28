@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('created_at DESC')
+    @orders = Order.all
   end
 
   def new
@@ -53,7 +54,7 @@ class ItemsController < ApplicationController
 
   def move_to_root_path
     @item = Item.find(params[:id])
-    unless current_user.id == @item.user_id
+    if current_user.id != @item.user_id || Order.exists?(item_id: @item.id)
       redirect_to root_path
     end
   end
