@@ -10,13 +10,13 @@ class OrderDeliveryAddress
     validates :municipalities
     validates :address
     validates :phone_number, numericality: true, length: { minimum: 10, maximum: 11 }
-    validates :order_id
+    validates :token
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
 
-  def save
+  def storage
     order = Order.create(user_id: user_id, item_id: item_id)
-    DliveryAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, municipalities: municipalities, address: address, building: building, phone_number: phone_number, order_id: order.id)
+    DeliveryAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, municipalities: municipalities, address: address, building: building, phone_number: phone_number, order_id: order.id)
   end
 
 end
