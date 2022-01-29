@@ -9,17 +9,16 @@ class User < ApplicationRecord
     validates :birth_date
   end
 
-  PASSWORD_RULES = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+  PASSWORD_RULES = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   NAME_RULES = /\A[ぁ-んァ-ヶー-龠々ー]+\z/
   NAME_READ_RULES = /\A[ァ-ヶー]+\z/
 
-  validates :password, format: { with: PASSWORD_RULES, message: " must be alphanumeric" }
-  validates :last_name, presence: true, format: { with: NAME_RULES, message: "full-width Japanese only" }
-  validates :first_name, presence: true, format: { with: NAME_RULES, message: "full-width Japanese only" }
-  validates :last_name_read, presence: true, format: { with: NAME_READ_RULES, message: "full-width katakana only" }
-  validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: "full-width katakana only" }
+  validates :password, format: { with: PASSWORD_RULES, message: ' must be alphanumeric' }
+  validates :last_name, presence: true, format: { with: NAME_RULES, message: 'full-width Japanese only' }
+  validates :first_name, presence: true, format: { with: NAME_RULES, message: 'full-width Japanese only' }
+  validates :last_name_read, presence: true, format: { with: NAME_READ_RULES, message: 'full-width katakana only' }
+  validates :first_name_read, presence: true, format: { with: NAME_READ_RULES, message: 'full-width katakana only' }
 
   has_many :items
   has_many :orders
-
 end

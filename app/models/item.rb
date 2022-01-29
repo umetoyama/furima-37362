@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   belongs_to :user
   has_one_attached :image
   has_one :order
@@ -16,7 +15,8 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :price, presence: true,
+                    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   # , format: { with: /\A[0-9]+\z/, message: "must be single-byte numbers only"}
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
@@ -26,5 +26,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_time_id
   end
-
 end

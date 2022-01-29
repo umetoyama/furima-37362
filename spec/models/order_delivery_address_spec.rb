@@ -6,7 +6,6 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id, item_id: item.id)
-      # , item_id: item.id
       sleep 0.1
     end
 
@@ -29,7 +28,7 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できない' do
         @order_delivery_address.postal_code = '1234567'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_delivery_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが1だと保存できない' do
         @order_delivery_address.prefecture_id = 1
@@ -52,19 +51,19 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         expect(@order_delivery_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberが9文字以下の時保存できない' do
-        @order_delivery_address.phone_number = 12345
+        @order_delivery_address.phone_number = 12_345
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number must be between 10 and 11 single-byte numbers")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number must be between 10 and 11 single-byte numbers')
       end
       it 'phone_numberが12文字以上の時保存できない' do
-        @order_delivery_address.phone_number = 123456789123
+        @order_delivery_address.phone_number = 123_456_789_123
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number must be between 10 and 11 single-byte numbers")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number must be between 10 and 11 single-byte numbers')
       end
       it 'phone_numberに全角数字が含まれていると保存できない' do
         @order_delivery_address.phone_number = '０７０１２３４５６７７'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is not a number')
       end
       it 'userが紐付いていないと登録できない' do
         @order_delivery_address.user_id = nil
