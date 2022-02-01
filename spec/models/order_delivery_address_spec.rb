@@ -23,62 +23,62 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'postal_codeが空だと保存できない' do
         @order_delivery_address.postal_code = ''
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("郵便番号を入力してください", "郵便番号はハイフンを含む適当な数列で入力して下さい")
+        expect(@order_delivery_address.errors.full_messages).to include("Postal code can't be blank")
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できない' do
         @order_delivery_address.postal_code = '1234567'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('郵便番号はハイフンを含む適当な数列で入力して下さい')
+        expect(@order_delivery_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが1だと保存できない' do
         @order_delivery_address.prefecture_id = 1
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("都道府県を入力して下さい")
+        expect(@order_delivery_address.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'municipalitiesが空だと登録できない' do
         @order_delivery_address.municipalities = ''
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("市区町村を入力してください")
+        expect(@order_delivery_address.errors.full_messages).to include("Municipalities can't be blank")
       end
       it 'addressが空だと登録できない' do
         @order_delivery_address.address = ''
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("番地を入力してください")
+        expect(@order_delivery_address.errors.full_messages).to include("Address can't be blank")
       end
       it 'phone_numberが空だと登録できない' do
         @order_delivery_address.phone_number = ''
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("電話番号を入力してください", "電話番号は数値で入力してください", "電話番号は10~11桁の半角数字のみです")
+        expect(@order_delivery_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberが9文字以下の時保存できない' do
         @order_delivery_address.phone_number = 12_345
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('電話番号は10~11桁の半角数字のみです')
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number must be between 10 and 11 single-byte numbers')
       end
       it 'phone_numberが12文字以上の時保存できない' do
         @order_delivery_address.phone_number = 123_456_789_123
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('電話番号は10~11桁の半角数字のみです')
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number must be between 10 and 11 single-byte numbers')
       end
       it 'phone_numberに全角数字が含まれていると保存できない' do
         @order_delivery_address.phone_number = '０７０１２３４５６７７'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('電話番号は数値で入力してください')
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is not a number')
       end
       it 'userが紐付いていないと登録できない' do
         @order_delivery_address.user_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Userを入力してください")
+        expect(@order_delivery_address.errors.full_messages).to include("User can't be blank")
       end
       it 'itemが紐付いていないと登録できない' do
         @order_delivery_address.item_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Itemを入力してください")
+        expect(@order_delivery_address.errors.full_messages).to include("Item can't be blank")
       end
       it 'tokenが空だと登録できない' do
         @order_delivery_address.token = ''
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("クレジットカード情報を入力してください")
+        expect(@order_delivery_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
